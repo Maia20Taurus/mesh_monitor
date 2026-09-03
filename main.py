@@ -24,6 +24,7 @@ if __name__ == "__main__":
     def onReceiveMessage(packet, interface):
         try:
             if packet["decoded"]["portnum"] == "TEXT_MESSAGE_APP":
+                print(packet['decoded'])
                 message = packet["decoded"]["text"]
                 id = packet["fromId"]
                 timeUnixEpoch = packet["rxTime"]
