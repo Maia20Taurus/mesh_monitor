@@ -64,9 +64,6 @@ if __name__ == "__main__":
         print("Connected to device")
         print(f"self node user: {interface.getMyUser()}")
 
-    def onLogLine(interface, line):
-        print(f"LOG LINE: {line}")
-
     pub.subscribe(onReceiveMessage, "meshtastic.receive")
     pub.subscribe(onConnection, "meshtastic.connection.established")
     interface = meshtastic.serial_interface.SerialInterface()
