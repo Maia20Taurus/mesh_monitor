@@ -21,10 +21,9 @@ if __name__ == "__main__":
     }
     sesh.headers.update(headers)
 
-    def onReceiveMessage(packet, interface):
+    def on_receive_message(packet, interface):
         try:
             if packet["decoded"]["portnum"] == "TEXT_MESSAGE_APP":
-                print(packet)
                 message = packet["decoded"]["text"]
                 id = packet["fromId"]
                 timeUnixEpoch = packet["rxTime"]
@@ -61,12 +60,12 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Could not key packet: {packet} \n {'-'*30} \n with exception {e}")
 
-    def onConnection(interface, topic=pub.AUTO_TOPIC):
+    def on_connection(interface, topic=pub.AUTO_TOPIC):
         print("Connected to device")
         print(f"self node user: {interface.getMyUser()}")
 
-    pub.subscribe(onReceiveMessage, "meshtastic.receive")
-    pub.subscribe(onConnection, "meshtastic.connection.established")
+    pub.subscribe(on_receive_message, "meshtastic.receive")
+    pub.subscribe(on_connection, "meshtastic.connection.established")
     interface = meshtastic.serial_interface.SerialInterface()
 
     while True:
